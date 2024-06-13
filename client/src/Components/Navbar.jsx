@@ -119,7 +119,7 @@ function Navbar() {
               textAlign:"left"
             }}
           >
-            GOOGLE DOCS CLONE 
+            PAGE CRAFT 
           </Typography>
         </Toolbar>
           
