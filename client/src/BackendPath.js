@@ -1,2 +1,2 @@
-const BackendPath=`https://clone-docs.vercel.app/`;
+const BackendPath=`https://localhost:5000`;
 export default BackendPath
