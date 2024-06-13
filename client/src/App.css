@@ -2,9 +2,11 @@
   display: flex;
   justify-content: center;
   position: sticky;
-  top: 0;
+  top: 84px;
   z-index: 2;
   background-color: #F3F3F3;
+}
+.refClass{
 }
 .container{
   width: 60%;
@@ -12,4 +14,73 @@
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
   margin: 10px auto 10px auto !important;
   min-height: 100vh;
+}
+body{
+  background-image:url('./assets/deer.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  /* overflow: hidden; */
+}
+.ParentContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 5px purple solid; */
+  min-height: 100vh;
+}
+.FormContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  width: 340px;
+  height: 382px;
+  flex-direction: column;
+  border: 5px solid rgba(255,255,255,0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  padding: 28px 83px 10px 83px;
+}
+.AuthForm{
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  gap: 20px;
+}
+.DocsContainer{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 17px;
+  padding: 20px;
+  margin: 0 auto;
+}
+.css-1e98tms-MuiToolbar-root{
+  padding-left: 0px !important;
+}
+.ButtonContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.or{
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid #000; 
+  line-height: 0.1em;
+  margin: 10px 0 20px; 
+  font-size: 20px;
+}
+.or-text{
+   background-color: #F3F3F3;
+   border-radius: 10px;
+   backdrop-filter: blur(20px) !important;
+   z-index: 100;
+   padding:0 10px; 
 }

@@ -5,7 +5,10 @@ import "quill/dist/quill.snow.css";
 import { styled } from "@mui/material/styles";
 import { io } from "socket.io-client";
 import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getAuth, onAuthStateChanged ,signOut} from "firebase/auth";
+import { auth } from '../FirebaseConfig'
+import SocketPath from '../SocketPath.js'
 
 const Mycomponent = styled(Box)(() => ({
   backgroundColor: `#F5F5F5`,
@@ -32,9 +35,45 @@ const toolbarOptions = [
   ["clean"], // remove formatting button
 ];
 const Editor = () => {
+  const navigate=useNavigate();
+  const [CurrentUser,SetUser]=useState(null);
+  const [UserID,SetUserID]=useState('');
+
+  useEffect(()=>{
+    const check=()=>{
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          SetUser(user);
+          SetUserID(user.uid)
+          console.log(UserID)
+        } else {
+          console.log('user state changed from editor jsx');
+          // navigate('/')
+          
+        }
+      });
+    }
+    check();
+  },[auth])
+
+  // CurrentUser && console.log('my user right now is ',CurrentUser.email)
+
+  const HandleLogout=()=>{
+    signOut(auth).then(() => {
+      // console.log('signed out worked')
+      SetUser('');
+      // navigate(`/`);
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+    
+  }
+
   const {id}=useParams();
   const [quill, setQuill] = useState();
   const [socket, setSocket] = useState();
+  
   useEffect(() => {
     const quillServer = new Quill("#container", {
       modules: {
@@ -48,7 +87,7 @@ const Editor = () => {
   }, []);
 
   useEffect(() => {
-    const socketServer = io("http://localhost:5500/");
+    const socketServer = io(`${SocketPath}`);
     setSocket(socketServer);
     return () => {
       socketServer.disconnect();
@@ -93,32 +132,39 @@ const Editor = () => {
 
 
 useEffect(() => {
-  if (quill === null || socket === null) return;
+  if (CurrentUser===null || quill === null || socket === null) return;
 
   socket && socket.once('load-document', document => {
-      console.log('this is my doc',document);
+      // console.log('this is my doc',document);
       quill.setContents(document);
   })
 
-  socket && socket.emit('get-document', id);
-},  [quill, socket, id]);
+  socket && socket.emit('get-document', id,UserID);
+},  [quill, socket, id,UserID]);
 
 
   useEffect(() => {
-    if (socket === null || quill === null) return;
+    
+      if (socket === null || quill === null) return;
+      const interval = setInterval(async() => {
+        const len= await quill.getLength()
+        if(len>1){
+          socket.emit('save-document', await quill.getContents())
+        }
+      }, 2000);
 
-    const interval = setInterval(async() => {
-        socket.emit('save-document', await quill.getContents())
-    }, 2000);
-
-    return () => {
-        clearInterval(interval);
-    }
+      return () => {
+          clearInterval(interval);
+      }
   }, [socket, quill]);
-    return(
+
+  return(
   <>
   <Mycomponent className='refClass'>
-      <Box className='container' id='container'></Box>
+      {/* <p>{CurrentUser? CurrentUser.email: ""}</p>
+      <button onClick={HandleLogout}>Logout</button> */}
+      <Box className='container' id='container'>
+      </Box>
    </Mycomponent>
   </>);
 };

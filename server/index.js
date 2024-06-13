@@ -1,22 +1,23 @@
 import { Server } from "socket.io";
 import { createServer } from "http";
-// import Connection from "./database/db.js";
 import Connection from "./database/db.js";
 import { getDocument,updateDocument } from "./database/dbFunctions.js";
-
+import { AddDocToUser } from "./database/dbFunctions.js";
+import  FrontendPath  from "./FrontendPath.js";
 Connection();
+
 const httpServer=createServer();
 const io = new Server(httpServer, {
     cors:{
-        origin:"http://localhost:3000",
+        origin:`${FrontendPath}`,
         credentials:true,
     }
 });
 
 io.on("connection",(socket)=>{
 
-    socket.on('get-document',async(id)=>{
-
+    socket.on('get-document',async(id,UserID)=>{
+        
         const document=await getDocument(id);
 
         socket.join(id);
@@ -29,8 +30,9 @@ io.on("connection",(socket)=>{
 
         socket.on('save-document', async data => {
             await updateDocument(id, data);
+            await AddDocToUser(id,UserID);
         })
         
-    })
+    });
 })
 httpServer.listen(5500);
