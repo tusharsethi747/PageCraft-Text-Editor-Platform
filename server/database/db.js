@@ -5,6 +5,7 @@ import { config } from "dotenv";
 import express from "express"
 import { UserDocs } from "./UserDocs.js";
 import cors from 'cors'
+
 const app=express();
 app.use(cors());
 

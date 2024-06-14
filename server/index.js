@@ -4,7 +4,11 @@ import Connection from "./database/db.js";
 import { getDocument,updateDocument } from "./database/dbFunctions.js";
 import { AddDocToUser } from "./database/dbFunctions.js";
 import  FrontendPath  from "./FrontendPath.js";
+
+
 Connection();
+
+
 
 const httpServer=createServer();
 const io = new Server(httpServer, {
