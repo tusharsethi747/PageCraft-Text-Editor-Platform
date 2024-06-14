@@ -4,11 +4,15 @@ import Connection from "./database/db.js";
 import { getDocument,updateDocument } from "./database/dbFunctions.js";
 import { AddDocToUser } from "./database/dbFunctions.js";
 import  FrontendPath  from "./FrontendPath.js";
-
+import express from 'express';
 
 Connection();
 
+const app = express();
 
+app.get('/', (req, res) => {
+    res.send('Backend server is running');
+});
 
 const httpServer=createServer();
 const io = new Server(httpServer, {
