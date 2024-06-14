@@ -52,6 +52,7 @@ const Showdocs = () => {
 
 
 
+  console.log('my docs list is .. i am new console',DocsList)
   return (
     <>
       {/* <button onClick={HandleLogout}>Logout</button>
