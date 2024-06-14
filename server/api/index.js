@@ -1,13 +1,13 @@
 import { Server } from "socket.io";
 import { createServer } from "http";
-import Connection from "./database/db.js";
-import { getDocument,updateDocument } from "./database/dbFunctions.js";
-import { AddDocToUser } from "./database/dbFunctions.js";
-import  FrontendPath  from "./FrontendPath.js";
+import Connection from "../database/db.js";
+import { getDocument,updateDocument } from "../database/dbFunctions.js";
+import { AddDocToUser } from "../database/dbFunctions.js";
+import  FrontendPath  from "../FrontendPath.js";
 import express from 'express';
 
 Connection();
-
+// i have changed the index.js from root dir to api folder !! 
 const app = express();
 
 app.get('/', (req, res) => {
@@ -44,3 +44,11 @@ io.on("connection",(socket)=>{
     });
 })
 httpServer.listen(5500);
+
+// this is the change in code of index.js 
+export default (req, res) => {
+    httpServer.listen(0, () => {
+        console.log("Server is running");
+    });
+    res.status(200).send('Server is running');
+};
