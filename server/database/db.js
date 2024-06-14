@@ -12,7 +12,14 @@ app.use(cors());
 config();
 const connection=()=>{
 
-
+    app.get('/',(req,res)=>{
+        try{
+            console.log('i am in / ');
+        }
+        catch(error){
+            console.log('error found in / ', error.message);
+        }
+    })
     app.get('/userdocs/:id',async (req,res)=>{
         try{
             const current_user_id=req.params.id;
