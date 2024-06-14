@@ -15,9 +15,11 @@ const connection=()=>{
     app.get('/',(req,res)=>{
         try{
             console.log('i am in / ');
+            return res.status(200).send('i am in /')
         }
         catch(error){
             console.log('error found in / ', error.message);
+            return res.status(500).send(error.message);
         }
     })
     app.get('/userdocs/:id',async (req,res)=>{
