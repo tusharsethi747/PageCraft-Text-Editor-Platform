@@ -84,8 +84,8 @@ const Showdocs = () => {
             // <div key={index}>
             //   <Link to= {`/Editor/docs/${doc_id}`}>click here for {`${doc_id}`}</Link>
             // </div>
-          <Link to= {`/Editor/docs/${doc_id}`} style={{textDecoration:"none"}}>
-            <Card sx={{ maxWidth: 280}} key={index} >
+          <Link to= {`/Editor/docs/${doc_id}`} style={{textDecoration:"none"}} key={index}>
+            <Card sx={{ maxWidth: 280}}  >
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -98,8 +98,7 @@ const Showdocs = () => {
                 <Typography gutterBottom variant="h5" component="div">
                   {`${doc_id}`}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  <Link to= {`/Editor/docs/${doc_id}`} style={{textDecoration:"none"}}>Click here to open this Document !!</Link>
+                <Typography variant="body2" color="text.secondary">Click here to open this Document !!
                 </Typography>
               </CardContent>
             </CardActionArea>
