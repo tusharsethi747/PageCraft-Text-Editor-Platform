@@ -46,9 +46,9 @@ io.on("connection",(socket)=>{
 httpServer.listen(5500);
 
 // this is the change in code of index.js 
-export default (req, res) => {
-    httpServer.listen(0, () => {
-        console.log("Server is running");
-    });
-    res.status(200).send('Server is running');
-};
+// export default (req, res) => {
+//     httpServer.listen(0, () => {
+//         console.log("Server is running");
+//     });
+//     res.status(200).send('Server is running');
+// };
