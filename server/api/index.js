@@ -84,7 +84,7 @@ mongoose.connect(URL)
     });
 
     io.on("connection",(socket)=>{
-        // console.log('i am inside socket connection')
+        console.log('i am inside socket connection')
 
         socket.on('get-document',async(id,UserID)=>{
             
