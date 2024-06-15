@@ -1,3 +1,3 @@
-const BackendPath=`http://localhost:5000`;
-// const BackendPath=`https://page-craft-seven.vercel.app`;
+// const BackendPath=`http://localhost:5000`;
+const BackendPath=`https://clone-docs.onrender.com`;
 export default BackendPath
