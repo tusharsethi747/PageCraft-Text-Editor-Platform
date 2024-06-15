@@ -89,6 +89,7 @@ const Editor = () => {
   useEffect(() => {
     const socketServer = io(`${SocketPath}`);
     setSocket(socketServer);
+    console.log(setSocket)
     return () => {
       socketServer.disconnect();
     };
