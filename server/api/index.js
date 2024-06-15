@@ -78,7 +78,7 @@ mongoose.connect(URL)
     // console.log(httpServer);
     const io = new Server(httpServer, {
         cors:{
-            origin:`${FrontendPath}`,
+            origin:"*",
             credentials:true,
         }
     });
